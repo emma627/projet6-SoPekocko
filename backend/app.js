@@ -2,6 +2,15 @@
 const express = require('express');
 //importer le package body-parser
 const bodyParser = require('body-parser');
+
+const mongoose = require('mongoose');
+//connextion à la base de données avec mongoDB
+mongoose.connect('mongodb+srv://user123:utilisateur123@cluster0.h4n1u.mongodb.net/test?retryWrites=true&w=majority',
+  { useNewUrlParser: true,
+    useUnifiedTopology: true })
+  .then(() => console.log('Connexion à MongoDB réussie !'))
+  .catch(() => console.log('Connexion à MongoDB échouée !'));
+
 //création de l'application express
 const app = express();
 
