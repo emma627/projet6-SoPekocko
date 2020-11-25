@@ -2,9 +2,16 @@
 const express = require('express');
 //importer le package body-parser
 const bodyParser = require('body-parser');
-
+//importer le package mongoose
 const mongoose = require('mongoose');
-//connextion à la base de données avec mongoDB
+
+//importer le routeur et enregistrer dans l'application
+const saucesRoutes = require('./routes/sauce');
+
+
+
+
+//connextion à la base de données MongoDB avec mongoose
 mongoose.connect('mongodb+srv://user123:utilisateur123@cluster0.h4n1u.mongodb.net/test?retryWrites=true&w=majority',
   { useNewUrlParser: true,
     useUnifiedTopology: true })
@@ -26,3 +33,9 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 //pour qu'on puisse y accéder depuis les autres fichiers
 module.exports = app;
+
+
+
+
+//enregistrer le routeur pour toutes les demandes effectuées vers /api/sauces
+app.use('/api/sauces', saucesRoutes);
