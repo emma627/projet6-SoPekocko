@@ -5,10 +5,10 @@ const bodyParser = require('body-parser');
 //importer le package mongoose
 const mongoose = require('mongoose');
 
-//importer le routeur et enregistrer dans l'application
+//importer le routeur sauce et enregistrer dans l'application
 const saucesRoutes = require('./routes/sauce');
-
-
+//importer le routeur utilisateur et enregistrer dans l'application
+const userRoutes = require('./routes/user');
 
 
 //connextion à la base de données MongoDB avec mongoose
@@ -39,3 +39,6 @@ module.exports = app;
 
 //enregistrer le routeur pour toutes les demandes effectuées vers /api/sauces
 app.use('/api/sauces', saucesRoutes);
+/*la route attendue par le frontend /api/auth,
+tout ce qui est route liée à l'authentification,passera les userRoutes */
+app.use('/api/auth', userRoutes);
