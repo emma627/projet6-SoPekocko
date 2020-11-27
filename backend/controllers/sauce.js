@@ -17,7 +17,7 @@ exports.getAllSauces = (req, res, next) => {
   
   // Création d'une nouvelle sauce (Post)
   exports.createSauce = (req, res, next) => {
-    const Sauce =new Sauce({
+    const sauce =new Sauce({
       userId: req.body.title,
       name: req.body.name,
       manufacturer: req.body.manufacturer,
@@ -38,7 +38,7 @@ exports.getAllSauces = (req, res, next) => {
   
   // Modification d'une sauce (Update)
   exports.modifySauce = (req, res, next) => {
-    const Sauce =new Sauce({
+    const sauce =new Sauce({
       _id: req.params.id,
       userId: req.body.title,
       name: req.body.name,
@@ -52,7 +52,7 @@ exports.getAllSauces = (req, res, next) => {
       usersLiked: req.body.usersLiked,
       usersDisliked: req.body.usersDisliked,
     });
-      Sauce.updateOne({ _id: req.params.id }, thing)
+      Sauce.updateOne({ _id: req.params.id }, sauce)
         .then(() => res.status(200).json({ message: 'Objet modifié !'}))
         .catch(error => res.status(400).json({ error }));
   };

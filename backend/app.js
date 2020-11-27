@@ -4,6 +4,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 //importer le package mongoose
 const mongoose = require('mongoose');
+//
+require('dotenv').config();
 
 //importer le routeur sauce et enregistrer dans l'application
 const saucesRoutes = require('./routes/sauce');
@@ -12,7 +14,7 @@ const userRoutes = require('./routes/user');
 
 
 //connextion à la base de données MongoDB avec mongoose
-mongoose.connect('mongodb+srv://user123:utilisateur123@cluster0.h4n1u.mongodb.net/test?retryWrites=true&w=majority',
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/test?retryWrites=true&w=majority`,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
