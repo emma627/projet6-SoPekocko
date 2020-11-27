@@ -2,6 +2,7 @@
 const bcrypt = require('bcrypt');
 //package qui nous perment de créer des token et de les vérifier
 const jwt = require('jsonwebtoken');
+//importer schéma utilisateur
 const User = require('../models/User');
 
 //enregistrement de nouveaux utilisateurs
@@ -21,7 +22,7 @@ exports.signup = (req, res, next) => {
 //fonction login pour connecter des utilisateurs existants
 exports.login = (req, res, next) => {
     // Recherche d'un utilisateur dans la base de données
-    User.findOne({ email: emailInbase64 })
+    User.findOne({ email: req.body.email})
     .then(user => {
         // Si on ne trouve pas l'utilisateur
         if(!user) {
