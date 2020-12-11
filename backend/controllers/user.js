@@ -7,18 +7,22 @@ const User = require('../models/User');
 
 //enregistrement de nouveaux utilisateurs
 exports.signup = (req, res, next) => {
+    //hasher le mot de passe passé par le frontend
     bcrypt.hash(req.body.password, 10)
+    //créer  un nouveau user avec ce mot de passe crypté
       .then(hash => {
         const user = new User({
           email: req.body.email,
           password: hash
         });
+        //enregistrer cet utilisateur dans la base de données
         user.save()
           .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
           .catch(error => res.status(400).json({ error }));
       })
       .catch(error => res.status(500).json({ error }));
   };
+
 //fonction login pour connecter des utilisateurs existants
 exports.login = (req, res, next) => {
     // Recherche d'un utilisateur dans la base de données
@@ -36,7 +40,7 @@ exports.login = (req, res, next) => {
             }
             res.status(200).json({
                 userId: user._id,
-                // créer un token pour sécuriser le compte de l'utilisateur
+                // créer un token pour backend afin de vérifier l'authentification de l'utilisateur pour sécuriser son compte
                 token: jwt.sign(
                     { userId: user._id },
                     'RANDOM_TOKEN_SECRET',

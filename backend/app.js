@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 //
 require('dotenv').config();
+//accès au chemin de notre système de fichier
+const path = require('path');
 
 //importer le routeur sauce et enregistrer dans l'application
 const saucesRoutes = require('./routes/sauce');
@@ -37,8 +39,8 @@ app.use(bodyParser.json());
 module.exports = app;
 
 
-
-
+//dire à l'application express de servir ce dossier images
+app.use('/images', express.static(path.join(__dirname, 'images')));
 //enregistrer le routeur pour toutes les demandes effectuées vers /api/sauces
 app.use('/api/sauces', saucesRoutes);
 /*la route attendue par le frontend /api/auth,
